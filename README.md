@@ -121,27 +121,9 @@ cp -r agents/ ~/.claude/agents/
 cp -r hooks/ ~/.claude/hooks/
 ```
 
-3. Add the hooks to your `~/.claude/settings.json`:
+3. Merge the hook config into your `~/.claude/settings.json`:
 
-```json
-{
-  "hooks": {
-    "SessionStart": [{ "command": "node ~/.claude/hooks/wolf-session-start.js" }],
-    "PreToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [{ "command": "node ~/.claude/hooks/wolf-pre-write.js" }]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [{ "command": "node ~/.claude/hooks/wolf-post-write.js" }]
-      }
-    ]
-  }
-}
-```
+   Use `settings.example.json` from this repo as a reference. Copy the `hooks` block into your existing `settings.json` — don't replace the whole file, just add the hooks section.
 
 4. Add your project conventions to `.wolf/cerebrum.md` (auto-created on first session):
 
