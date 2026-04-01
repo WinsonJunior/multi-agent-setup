@@ -110,8 +110,17 @@ All cycles are logged to `AUTOPILOT-LOG.md` for you to review.
 
 ## Installation
 
-1. Copy `agents/` to `~/.claude/agents/`
-2. Copy `hooks/` to `~/.claude/hooks/`
+1. Clone this repo:
+```bash
+git clone https://github.com/WinsonJunior/multi-agent-setup.git
+```
+
+2. Copy agents and hooks to Claude Code:
+```bash
+cp -r agents/ ~/.claude/agents/
+cp -r hooks/ ~/.claude/hooks/
+```
+
 3. Add the hooks to your `~/.claude/settings.json`:
 
 ```json
@@ -144,6 +153,43 @@ All cycles are logged to `AUTOPILOT-LOG.md` for you to review.
 ```
 
 **Requirements:** Node.js 18+, Claude Code
+
+---
+
+## Customizing agent skills
+
+Each agent's skills are declared in its frontmatter. Skills give agents domain knowledge — swap them out for your own or any skill you have installed by editing the agent file directly.
+
+The skill name must match the folder name in `~/.claude/skills/`. Claude Code loads them automatically — no other config needed.
+
+### What each agent expects
+
+| Agent | Skill type needed |
+|-------|------------------|
+| `backend` | API design, secrets management, any domain-specific knowledge for your stack |
+| `frontend` | UI/UX design patterns, component best practices |
+| `database` | Database best practices for your specific DB (Postgres, MySQL, etc.) |
+| `security-auditor` | Security vulnerability patterns (OWASP, etc.) |
+| `code-reviewer` | Code review standards for your language/framework |
+| `researcher` | Domain knowledge relevant to your project (trading, AI, etc.) |
+| `orchestrator` | Same as researcher — used in autonomous mode |
+| `task-planner` | Brainstorming and planning methodologies |
+
+### Example — swapping the database skill
+
+If you use MySQL instead of Postgres, replace the skill in `database.md`:
+
+```yaml
+---
+name: database
+skills:
+  - mysql-best-practices   # your own skill or any installed one
+---
+```
+
+### Adding your own skill
+
+Create a folder in `~/.claude/skills/your-skill-name/` with a `SKILL.md` file — Claude Code picks it up automatically. Then reference it by folder name in any agent's frontmatter.
 
 ---
 
