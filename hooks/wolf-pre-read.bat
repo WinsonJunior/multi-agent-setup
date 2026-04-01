@@ -1,3 +1,0 @@
-@echo off
-node "%~dp0wolf-pre-read.js" 2>&1
-exit 0
